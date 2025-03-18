@@ -3,12 +3,23 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(dotenv_path=BASE_DIR / ".env")
+DJANGO_ENV = os.getenv('DJANGO_ENV', 'development') 
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+if DJANGO_ENV == 'production':
+    env_path = BASE_DIR / ".env.production"
+elif DJANGO_ENV == 'development':
+    env_path = BASE_DIR / ".env.development"
+else:
+    env_path = BASE_DIR / ".env"  
+
+load_dotenv(dotenv_path=env_path)
+
+DATABASE_URL = f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 if not SECRET_KEY:
     raise ValueError("A variável de ambiente 'SECRET_KEY' não foi definida.")
 
@@ -59,7 +70,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "bit_academy.wsgi.application"
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default=DATABASE_URL)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
