@@ -1,14 +1,16 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = os.environ.Env()
+load_dotenv(dotenv_path=BASE_DIR / ".env")
 
-load_dotenv(dotenv_path=BASE_DIR / env)
-
-SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
+SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("A variável de ambiente 'SECRET_KEY' não foi definida.")
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
@@ -57,14 +59,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "bit_academy.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["POSTGRES_DB"],
-        "USER": os.environ["POSTGRES_USER"],
-        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
-        "HOST": os.environ["POSTGRES_HOST"],
-        "PORT": os.environ["POSTGRES_PORT"]
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -94,5 +89,7 @@ STATIC_URL = "static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+WHITENOISE_USE_FINDERS = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
