@@ -4,15 +4,15 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env_file = '.env.development' if os.getenv('DJANGO_ENV') != 'production' else '.env.production'
+env = os.environ.Env()
 
-load_dotenv(dotenv_path=BASE_DIR / env_file)
+load_dotenv(dotenv_path=BASE_DIR / env)
 
 SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")
 
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
