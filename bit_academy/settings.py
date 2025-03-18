@@ -14,12 +14,12 @@ elif DJANGO_ENV == 'development':
 else:
     env_path = BASE_DIR / ".env"  
 
-
 load_dotenv(dotenv_path=env_path)
 
 DATABASE_URL = f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+
 if not SECRET_KEY:
     raise ValueError("A variável de ambiente 'SECRET_KEY' não foi definida.")
 
