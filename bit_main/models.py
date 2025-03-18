@@ -39,6 +39,7 @@ class User(ModelBase, AbstractUser):
         unique=True,
         blank=False,
         null=False,
+        max_length=30,
         validators=[
             MinLengthValidator(6),
             MaxLengthValidator(20)

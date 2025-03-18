@@ -1,3 +1,10 @@
+from django.contrib.auth import get_user_model, password_validation, authenticate
+from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
+
+User = get_user_model()
+
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
 
@@ -6,10 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'name', 'email', 'xp', 'streak', 'active', 'password', 'created_at', 'modified_at']
         read_only_fields = ['id', 'created_at', 'modified_at']
 
-    def validate_email(self, value):
-        """ Valida se o email tem domínio específico, caso necessário """
-        if not value.endswith("@exemplo.com"):
-            raise serializers.ValidationError("O email deve pertencer ao domínio 'exemplo.com'.")
+    def validate_password(self, value):
+        """ Valida a senha usando as regras do Django """
+        password_validation.validate_password(value)
         return value
 
     def create(self, validated_data):
@@ -29,3 +35,69 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class SignupSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, min_length=8)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
+
+    def create(self, validated_data):
+        """ Criação do usuário garantindo que a senha seja armazenada de forma segura """
+        user = User(
+            username=validated_data['username'],
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        """ Autentica o usuário e gera tokens JWT """
+        user = authenticate(username=data["email"], password=data["password"])
+        if not user:
+            raise serializers.ValidationError("Credenciais inválidas.")
+
+        refresh = RefreshToken.for_user(user)
+        return {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token)
+        }
+
+
+class LogoutSerializer(serializers.Serializer):
+    refresh_token = serializers.CharField()
+
+    def validate(self, data):
+        """ Invalida o token de refresh """
+        try:
+            token = RefreshToken(data["refresh_token"])
+            token.blacklist()
+        except Exception as e:
+            raise serializers.ValidationError("Token inválido.")
+        return {}
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Se este e-mail estiver cadastrado, você receberá um link para redefinir sua senha.")
+        return value
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    new_password = serializers.CharField(write_only=True, min_length=8, max_length=128)
+
+    def validate_new_password(self, value):
+        """ Aplica as regras de senha do Django """
+        password_validation.validate_password(value)
+        return value
