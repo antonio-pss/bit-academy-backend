@@ -5,8 +5,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Pegar em qual ambiente estamos (prod ou dev).
 DJANGO_ENV = os.getenv('DJANGO_ENV', 'development') 
 
+# Salvar o caminho do .env dependendo do ambiente.
 if DJANGO_ENV == 'production':
     env_path = BASE_DIR / ".env.production"
 elif DJANGO_ENV == 'development':
@@ -14,19 +16,13 @@ elif DJANGO_ENV == 'development':
 else:
     env_path = BASE_DIR / ".env"  
 
+# Carregar as variáveis de ambiente.
 load_dotenv(dotenv_path=env_path)
 
+# Para simplificar a conexão com o banco.
 DATABASE_URL = f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-if not SECRET_KEY:
-    raise ValueError("A variável de ambiente 'SECRET_KEY' não foi definida.")
-
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
 ALLOWED_HOSTS = ["*"]
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -34,7 +30,6 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
@@ -45,8 +40,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Adicionados
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "bit_academy.urls"
@@ -95,12 +88,5 @@ TIME_ZONE = "America/Manaus"
 USE_I18N = True
 
 USE_TZ = True
-
-STATIC_URL = "static/"
-
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
-WHITENOISE_USE_FINDERS = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
