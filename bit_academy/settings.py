@@ -16,7 +16,7 @@ else:
 
 load_dotenv(dotenv_path=env_path)
 
-DATABASE_URL = f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
+DATABASE_URL = f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{int(os.getenv('POSTGRES_PORT'))}/{os.getenv('POSTGRES_DB')}"
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
