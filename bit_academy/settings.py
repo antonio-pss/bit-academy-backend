@@ -63,9 +63,11 @@ TEMPLATES = [
 WSGI_APPLICATION = "bit_academy.wsgi.application"
 
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL)
-}
-
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            # ssl_require=True   
+        )
+    }
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
