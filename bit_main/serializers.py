@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, password_validation, authenticate
+from django.contrib.auth import get_user_model, password_validation
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -61,8 +61,11 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         """ Autentica o usuário e gera tokens JWT """
-        user = authenticate(username=data["email"], password=data["password"])
-        if not user:
+        email = data["email"]
+        password = data["password"]
+        user = User.objects.filter(email=email).first()
+
+        if user is None or not user.check_password(password):
             raise serializers.ValidationError("Credenciais inválidas.")
 
         refresh = RefreshToken.for_user(user)
@@ -89,8 +92,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
     def validate_email(self, value):
-        if not User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("Se este e-mail estiver cadastrado, você receberá um link para redefinir sua senha.")
+        User.objects.filter(email=value).exists()
         return value
 
 

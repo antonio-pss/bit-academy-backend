@@ -22,7 +22,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('auth/', include('bit_main.urls')),  # Incluindo as URLs do app 'bit_main'
+    path('bit-main/', include('bit_main.urls')),  # Incluindo as URLs do app 'bit_main'
+    # Django Rest Framework
+    path('api-auth/', include('rest_framework.urls')),
     # Swegger
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

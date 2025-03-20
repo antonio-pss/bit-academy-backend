@@ -8,7 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bit_academy/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_academy/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bit_academy/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_academy/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bit_main/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bit_main/viewsets.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/viewsets.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742403422616</updated>
       <workItem from="1742403423798" duration="2327000" />
-      <workItem from="1742487234073" duration="2799000" />
+      <workItem from="1742487234073" duration="5241000" />
     </task>
     <servers />
   </component>
