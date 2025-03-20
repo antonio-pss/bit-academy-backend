@@ -1,1 +1,1 @@
-web: gunicorn bit_academy.wsgi --log-file=-
+web: gunicorn bit_academy.wsgi --log-file=- --bind [::]:${PORT-3000}
