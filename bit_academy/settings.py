@@ -40,12 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # other apps
     'rest_framework_simplejwt',
     'rest_framework',
     'allauth',
     'allauth.account',
     'django_filters',
     'corsheaders',
+    'drf_yasg',
+    # our apps
     'bit_main',
 ]
 
@@ -57,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Add the account middleware:
+    # Add the social account middleware:
     'allauth.account.middleware.AccountMiddleware',
 ]
 
