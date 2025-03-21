@@ -7,9 +7,11 @@
     <list default="true" id="7e2be1be-0430-4655-b7c0-e9d813ea8c2c" name="Changes" comment="chore: initializing the project architecture with the bit_main app user model, creating requirements and serialization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bit_academy/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_academy/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bit_academy/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_academy/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bit_main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bit_main/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bit_main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bit_main/viewsets.py" beforeDir="false" afterPath="$PROJECT_DIR$/bit_main/viewsets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="chore/Initializing-the-Django-project" />
+        <entry key="$PROJECT_DIR$" value="feature/Documantation" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,10 +55,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Django Server.Bit Academy.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/Documantation",
+    "git-widget-placeholder": "feature/social-login",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,6 +68,34 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Bit Academy" type="Python.DjangoServer" factoryName="Django server">
+      <module name="bit-academy-backend" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="bit_academy.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13 (bit-academy-backend)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -82,7 +113,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742403422616</updated>
       <workItem from="1742403423798" duration="2327000" />
-      <workItem from="1742487234073" duration="5241000" />
+      <workItem from="1742487234073" duration="9009000" />
     </task>
     <servers />
   </component>

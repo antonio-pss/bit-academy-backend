@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django_filters',
     'corsheaders',
     'drf_yasg',

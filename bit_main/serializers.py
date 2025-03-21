@@ -103,3 +103,13 @@ class PasswordResetSerializer(serializers.Serializer):
         """ Aplica as regras de senha do Django """
         password_validation.validate_password(value)
         return value
+
+
+class UserDeleteSerializer(serializers.Serializer):
+    password = serializers.CharField(write_only=True, required=True, min_length=8)
+
+    def validate_password(self, value):
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError("Senha incorreta.")
+        return value

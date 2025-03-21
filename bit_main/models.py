@@ -1,7 +1,5 @@
 from django.core.validators import MinLengthValidator, MaxLengthValidator, validate_email
-from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractUser
-from django.core.exceptions import ValidationError
 from django.db import models
 
 

@@ -9,8 +9,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from bit_main import serializers
-from bit_main.serializers import PasswordResetRequestSerializer, PasswordResetSerializer
-
+from bit_main.serializers import PasswordResetRequestSerializer, PasswordResetSerializer, UserDeleteSerializer
 
 User = get_user_model()
 
@@ -41,6 +40,14 @@ class LoginUserViewset(APIView):
 class UserUpdateAPIViewset(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+
+class DeleteUserView(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserDeleteSerializer
 
     def get_object(self):
         return self.request.user
